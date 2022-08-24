@@ -18,14 +18,25 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix aas: <https://admin-shell.io/aas/3/0/RC02/>
 prefix def: <https://admin-shell.io/aas/3/0/RC02/DataTypeDefXsd/>
+prefix iec61360: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC02/>
 
 template idstt:to_enum_value(?class) {
 	 
-	if ( str(?parent) = str(<aas:DataTypeDefXsd>), 
-		if (str(?class) = str(<def:AnyUri>), "xs:anyURI", 
+	if ( str(?parent) = str(<aas:DataTypeDefXsd>),
+		# then 
+		if (str(?class) = str(<def:AnyUri>),
+			# then 
+			"xs:anyURI",
+			# else 
 			CONCAT("xs:", LCASE( SUBSTR( ?localName, 1, 1)), SUBSTR( ?localName, 2))
 		),
-		st:call-template(idstt:to_class_name, ?class)
+		# else if
+		if ( str(?parent) = str(<iec61360:DataTypeIEC61360>),
+			# then
+			UCASE(replace(st:call-template(idstt:to_class_name, ?class), "([a-z])([A-Z])", CONCAT("$1", "_", "$2"))),
+		    # else
+			st:call-template(idstt:to_class_name, ?class) 
+		)
 	)
 
 }
