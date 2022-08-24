@@ -18,6 +18,28 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:enum-default-methods(?class) {
 
+	"\n"
+	"\n\t" st:call-template(idstt:to_enum_name, ?class) "(String value) {"
+	"\n\t\tthis.value = value;"
+	"\n\t}"
+	"\n"
+	"\n"
+	if(?useJackson, "\n\t@JsonValue", "")
+	"\n\t@Override"
+	"\n\tpublic String toString() {"
+	"\n\t\treturn value.toString();"
+	"\n\t}"
+	if(?useJackson, "\n\t@JsonCreator", "")
+ 	"\n\tpublic static " st:call-template(idstt:to_enum_name, ?class) " fromValue(String text) {"
+	"\n\t\tfor ("st:call-template(idstt:to_enum_name, ?class) " b : " st:call-template(idstt:to_enum_name, ?class)".values()) {"
+	"\n\t\t\tif (String.valueOf(b.value).equals(text)) {"
+	"\n\t\t\t\treturn b;"
+	"\n\t\t\t}"
+	"\n\t\t}"
+	"\n\t\treturn null;"
+  	"\n\t}"
+	
+	
     # "\n"
 	# "\n\t" st:call-template(idstt:to_enum_name, ?class) "(String id, List<TypedLiteral> labels, List<TypedLiteral> comments) {"
 	# "\n\t\ttry {"
@@ -85,4 +107,6 @@ template idstt:enum-default-methods(?class) {
 	# "\n\t}"
 
 }
-where {}
+where {
+	BIND(st:add-jackson-annotations() AS ?useJackson)
+}

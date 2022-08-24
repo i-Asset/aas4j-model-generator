@@ -30,6 +30,8 @@ template idstt:enum-default-properties (?class) {
 	# "\n\tprivate List<TypedLiteral> labels;"
 	# "\n\tprivate List<TypedLiteral> comments;"
 	# "\n"
+	"\n"
+	"\n\tprivate String value;"
 
 }
 where {}

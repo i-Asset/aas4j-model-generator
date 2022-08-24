@@ -35,8 +35,10 @@ template idstt:process-enum-individuals(?class) {
 		st:call-template(idstt:to_full_identifier, ?individual),
 		"\")\n")
 	)
-	ucase(replace(st:call-template(idstt:to_class_name, ?individual), "([a-z])([A-Z])", CONCAT("$1", "_", "$2")))
-    ","
+	"\t" ucase(replace(st:call-template(idstt:to_class_name, ?individual), "([a-z])([A-Z])", CONCAT("$1", "_", "$2")))
+	"(\""
+	st:call-template(idstt:to_enum_value, ?individual)
+    "\"),"
 }
 where  {
 	?classOrSubClass rdfs:subClassOf* ?class.

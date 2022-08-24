@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>model</artifactId>
+    <artifactId>aas-generated</artifactId>
 
 	<properties>
     <ontology.title>Asset Administration Shell</ontology.title>
@@ -262,9 +262,9 @@
                         <phase>initialize</phase>
                         <configuration>
                             <target>
-                                <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/rc02/model/impl"/>
-                                <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/rc02/model/builder"/>
-                                <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/rc02/model/annotations"/>
+                                <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/model/impl"/>
+                                <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/model/builder"/>
+                                <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/model/annotations"/>
                             </target>
                         </configuration>
                         <goals>
