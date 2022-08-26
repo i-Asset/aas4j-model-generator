@@ -30,13 +30,16 @@ template idstt:to_enum_value(?class) {
 			# else 
 			CONCAT("xs:", LCASE( SUBSTR( ?localName, 1, 1)), SUBSTR( ?localName, 2))
 		),
-		# else if
-		if ( str(?parent) = str(<iec61360:DataTypeIEC61360>),
+		# 
+		# special treatment for DataTypeIEC61360 - when required!
+		#
+		# if ( str(?parent) = str(<iec61360:DataTypeIEC61360>),
 			# then
-			UCASE(replace(st:call-template(idstt:to_class_name, ?class), "([a-z])([A-Z])", CONCAT("$1", "_", "$2"))),
+			# UCASE(replace(st:call-template(idstt:to_class_name, ?class), "([a-z])([A-Z])", CONCAT("$1", "_", "$2"))),
 		    # else
-			st:call-template(idstt:to_class_name, ?class) 
-		)
+		#	st:call-template(idstt:to_class_name, ?class) 
+		#)
+		st:call-template(idstt:to_class_name, ?class)
 	)
 
 }
