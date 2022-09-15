@@ -19,11 +19,5 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:property-to-builder-signature(?property, ?class) {
     st:call-template(idstt:to_java_field_name, ?property, ?class)
-    if ( ?isArray,
-    	"s",
-    	""
-    )
 }
-where {
-      BIND( st:call-template(idstt:property-allows-list, ?property, ?class) as ?isArray )
-}
+where {}
