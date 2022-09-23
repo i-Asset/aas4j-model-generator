@@ -261,6 +261,19 @@ aas:DataSpecificationShape a sh:NodeShape ;
 
 aas:DataSpecificationContentShape a sh:NodeShape ;
     sh:targetClass aas:DataSpecificationContent ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "(DataSpecificationContentShape): An aas:DataSpecificationContent is an abstract class. Please use one of the subclasses for the generation of instances."@en ;
+        sh:prefixes aas: ;
+        sh:select """
+            SELECT ?this ?type
+            WHERE {
+                ?this rdf:type ?type .
+                FILTER (?type = aas:DataSpecificationContent)
+            }
+        """ ;
+    ] ;
+
 .
 
 aas:EntityShape a sh:NodeShape ;
@@ -885,6 +898,29 @@ aas:ReferenceShape a sh:NodeShape ;
         sh:class aas:Key ;
         sh:minCount 1 ;
     ] ;
+#    sh:sparql [
+#        a sh:SPARQLConstraint ;
+#        sh:message "(ReferenceShape): An aas:Reference is an abstract class. Please use one of the subclasses for the generation of instances."@en ;
+#        sh:prefixes aas: ;
+#        sh:select """
+#            SELECT ?this ?type
+#            WHERE {
+#                ?this rdf:type ?type .
+#                FILTER (?type = aas:Reference)
+#            }
+#        """ ;
+#    ] ;
+
+.
+
+aas:GlobalReferenceShape a sh:NodeShape ;
+    sh:targetClass aas:GlobalReference ;
+    rdfs:subClassOf aas:ReferenceShape ;
+.
+
+aas:ModelReferenceShape a sh:NodeShape ;
+    sh:targetClass aas:ModelReference ;
+    rdfs:subClassOf aas:ReferenceShape ;
 .
 
 aas:ReferenceElementShape a sh:NodeShape ;
@@ -1054,6 +1090,152 @@ aas:SubmodelElementListShape a sh:NodeShape ;
     ] ;
 .
 
+aas:SecurityShape a sh:NodeShape ;
+    sh:targetClass aas:Security ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/Security/accessControlPolicyPoints> ;
+        sh:class aas:AccessControlPolicyPoints ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ]
+.
+
+aas:AccessControlPolicyPointsShape a sh:NodeShape ;
+    sh:targetClass aas:AccessControlPolicyPoints ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControlPolicyPoints/policyAdministrationPoint> ;
+        sh:class aas:AccessControl ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ]
+.
+
+aas:AccessControShape a sh:NodeShape ;
+    sh:targetClass aas:AccessControl ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/accessPermissionRule> ;
+        sh:class aas:AccessPermissionRule ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/selectableSubjectAttributes> ;
+        sh:class aas:Reference ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/defaultSubjectAttributes> ;
+        sh:class aas:Reference ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/selectablePermissions> ;
+        sh:class aas:Reference ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/defaultPermissions> ;
+        sh:class aas:Reference ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/selectableEnvironmentAttributes> ;
+        sh:class aas:Reference ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessControl/defaultEnvironmentAttributes> ;
+        sh:class aas:Reference ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] 
+.
+
+aas:AccessPermissionRuleShape a sh:NodeShape ;
+    sh:targetClass aas:AccessPermissionRule ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AccessPermissionRule/permissionsPerObject> ;
+        sh:class aas:PermissionsPerObject ;
+        sh:minCount 0 ;
+    ] 
+.
+
+aas:PermissionsPerObjectShape a sh:NodeShape ;
+    sh:targetClass aas:PermissionsPerObject ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/PermissionsPerObject/object> ;
+        sh:class aas:Reference ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/PermissionsPerObject/targetObjectAttributes> ;
+        sh:class aas:ObjectAttributes ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/PermissionsPerObject/permission> ;
+        sh:class aas:Permission ;
+        sh:minCount 0 ;
+    ] ;
+.
+
+aas:SubjectAttributesShape a sh:NodeShape ;
+    sh:targetClass aas:SubjectAttributes ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/SubjectAttributes/subjectAttribute> ;
+        sh:class aas:DataElement ;
+        sh:minCount 1 ;
+    ] ;
+.
+
+aas:ObjectAttributesShape a sh:NodeShape ;
+    sh:targetClass aas:ObjectAttributes ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/ObjectAttributes/objectAttribute> ;
+        sh:class aas:ModelReference ;
+        sh:minCount 1 ;
+    ] ;
+.
+
+aas:PermissionShape a sh:NodeShape ;
+    sh:targetClass aas:Permission ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/Permission/permission> ;
+        sh:class aas:ModelReference ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/Permission/kindOfPermission> ;
+        sh:class aas:PermissionKind ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+.
+    
 
 iec61360:DataSpecificationIEC61360Shape a sh:NodeShape ;
     sh:targetClass iec61360:DataSpecificationIEC61360 ;
