@@ -18,12 +18,14 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 
 template idstt:to_plural_form(?name) {
-    concat(str(?name), "")
+    # concat(str(?name), "")
     # TODO: check again after plural decisions in the metamodel have been made. Currently, this function causes too many
     # errors.
-    #if(strends(str(?name), "s"),
-    #    # name ends with "s", don't add another one
-    #    ?name,
+    # when name ends with "s", don't add another one, otherwise add the "s"
+    if( strends(str(?name), "s"),
+        ?name,
+        concat(str(?name), "s")
+    )
     #    if(strends(str(?name), "y"),
     #        # name ends with a "y" -> check character before that
     #        if (strends(str(?name), "ay") || strends(str(?name), "ey") || strends(str(?name), "oy") || strends(str(?name), "uy"),
