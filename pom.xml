@@ -161,7 +161,7 @@
 				<ontology.namespace>https://admin-shell.io/aas/3/0/RC02/</ontology.namespace>
 				<ontology.namespace.prefix>aas</ontology.namespace.prefix>
 				<infomodel-sourcebase>
-    					/Users/dglachs/github/sdt/eclipse-digitaltwin/aas4j-model-generator/spec/rdf
+    					./spec/rdf
     				</infomodel-sourcebase>
 			</properties>
 		</profile>
