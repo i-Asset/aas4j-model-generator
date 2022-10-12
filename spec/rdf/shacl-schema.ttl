@@ -913,16 +913,6 @@ aas:ReferenceShape a sh:NodeShape ;
 
 .
 
-aas:GlobalReferenceShape a sh:NodeShape ;
-    sh:targetClass aas:GlobalReference ;
-    rdfs:subClassOf aas:ReferenceShape ;
-.
-
-aas:ModelReferenceShape a sh:NodeShape ;
-    sh:targetClass aas:ModelReference ;
-    rdfs:subClassOf aas:ReferenceShape ;
-.
-
 aas:ReferenceElementShape a sh:NodeShape ;
     sh:targetClass aas:ReferenceElement ;
     rdfs:subClassOf aas:DataElementShape ;
@@ -1213,7 +1203,7 @@ aas:ObjectAttributesShape a sh:NodeShape ;
     sh:property [
         a sh:PropertyShape ;
         sh:path <https://admin-shell.io/aas/3/0/RC02/ObjectAttributes/objectAttribute> ;
-        sh:class aas:ModelReference ;
+        sh:class aas:Reference ;
         sh:minCount 1 ;
     ] ;
 .
@@ -1223,7 +1213,7 @@ aas:PermissionShape a sh:NodeShape ;
     sh:property [
         a sh:PropertyShape ;
         sh:path <https://admin-shell.io/aas/3/0/RC02/Permission/permission> ;
-        sh:class aas:ModelReference ;
+        sh:class aas:Reference ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
@@ -1236,6 +1226,50 @@ aas:PermissionShape a sh:NodeShape ;
     ] ;
 .
     
+aas:DescriptorShape a sh:NodeShape ;
+    sh:targetClass aas:Descriptor ;
+    sh:property [
+       a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/Descriptor/endpoint> ;
+        sh:class aas:Endpoint ;
+        sh:minCount 1 ;
+    ] ;
+.
+aas:AssetAdministrationShellDescriptorShape a sh:NodeShape ;
+    sh:targetClass aas:AssetAdministrationShellDescriptor ;
+    sh:property [
+       a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/globalAssetId> ;
+        sh:class aas:Reference ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+       a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/specificAssetId> ;
+        sh:class aas:SpecificAssetId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+.
+
+aas:EndpointShape a sh:NodeShape ;
+    sh:targetClass aas:Endpoint ;
+    sh:property [
+       a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/Endpoint/type> ;
+        sh:class xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+       a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/Endpoint/address> ;
+        sh:class xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+.
 
 iec61360:DataSpecificationIEC61360Shape a sh:NodeShape ;
     sh:targetClass iec61360:DataSpecificationIEC61360 ;

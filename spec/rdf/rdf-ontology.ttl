@@ -580,7 +580,7 @@ aas:DataTypeDefXsd rdf:type owl:Class ;
 ###  https://admin-shell.io/aas/3/0/RC02/DataTypeDefXsd/HexBinary
 <https://admin-shell.io/aas/3/0/RC02/DataTypeDefXsd/HexBinary> rdf:type aas:DataTypeDefXsd ;
     rdfs:label "Hex Binary"^^xsd:string ;
-    aas:valueType xsd:heyBinary;
+    aas:valueType xsd:hexBinary;
 .
 
 ###  https://admin-shell.io/aas/3/0/RC02/DataTypeDefXsd/Int
@@ -1567,27 +1567,102 @@ aas:Reference rdf:type owl:Class ;
     rdfs:comment "Type of the reference."@en ;
 .
 
-###
+###x
 ### Extensions for Reference -> ModelClasses START
 ###
 
 ###  https://admin-shell.io/aas/3/0/RC02/GlobalReference
-aas:GlobalReference rdf:type owl:Class ;
-    rdfs:subClassOf aas:Reference ;
-    rdfs:label "GlobalReference"^^xsd:string ;
-    rdfs:comment "Reference to an external resource."@en ;
-.
+### aas:GlobalReference rdf:type owl:Class ;
+###    rdfs:subClassOf aas:Reference ;
+###    rdfs:label "GlobalReference"^^xsd:string ;
+###    rdfs:comment "Reference to an external resource."@en ;
+###.
 
 ###  https://admin-shell.io/aas/3/0/RC02/ModelReference
-aas:ModelReference rdf:type owl:Class ;
-    rdfs:subClassOf aas:Reference ;
-    rdfs:label "ModelReference"^^xsd:string ;
-    rdfs:comment "Reference to an resource inside the AAS."@en ;
-.
+### aas:ModelReference rdf:type owl:Class ;
+###     rdfs:subClassOf aas:Reference ;
+###     rdfs:label "ModelReference"^^xsd:string ;
+###     rdfs:comment "Reference to an resource inside the AAS."@en ;
+### .
 
 ###
 ### Extensions for Reference -> ModelClasses END
 ###
+
+###  https://admin-shell.io/aas/3/0/RC02/Descriptor
+aas:Descriptor rdf:type owl:Class ;
+    rdfs:subClassOf aas:Identifiable ;
+    rdfs:label "Descriptor"^^xsd:string ;
+    rdfs:comment "Descriptor holding the endpoints."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/Reference/key
+<https://admin-shell.io/aas/3/0/RC02/Descriptor/endpoint> rdf:type owl:ObjectProperty ;
+    rdfs:label "has Endpoint"^^xsd:string ;
+    rdfs:domain aas:Descriptor ;
+    rdfs:range aas:Endpoint ;
+    rdfs:comment "Endpoint adress."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/Endpoint
+aas:Endpoint rdf:type owl:Class ;
+    rdfs:label "Endpoint"^^xsd:string ;
+    rdfs:comment "Service Endpoint of an I4.0 component."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/Endpoint/type
+<https://admin-shell.io/aas/3/0/RC02/Endpoint/type> rdf:type owl:ObjectProperty ;
+    rdfs:label "has type"^^xsd:string ;
+    rdfs:domain aas:Endpoint ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Endpoint type."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/Endpoint/address
+<https://admin-shell.io/aas/3/0/RC02/Endpoint/address> rdf:type owl:ObjectProperty ;
+    rdfs:label "has type"^^xsd:string ;
+    rdfs:domain aas:Endpoint ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Endpoint adress."@en ;
+.
+###  https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor
+aas:AssetAdministrationShellDescriptor rdf:type owl:Class ;
+    rdfs:subClassOf aas:Descriptor ;
+    rdfs:label "AssetAdministrationShell descriptor"^^xsd:string ;
+    rdfs:comment "Descriptor for AssetAdministrationShell ."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/globalAssetId
+<https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/globalAssetId> rdf:type owl:ObjectProperty ;
+    rdfs:label "has global asset id"^^xsd:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range aas:Reference ;
+    rdfs:comment "Global identifier of the asset the AAS is representing."@en ;
+.
+###  https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/specificAssetId
+<https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/specificAssetId> rdf:type owl:ObjectProperty ;
+    rdfs:label "has specific asset id"^^xsd:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range aas:SpecificAssetId ;
+    rdfs:comment "Reference to a specific asset ID representing a supplementary identifier of the asset represented by the Asset Administration Shell."@en ;
+.
+
+
+###  https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShell/submodel
+<https://admin-shell.io/aas/3/0/RC02/AssetAdministrationShellDescriptor/submodelDescriptor> rdf:type owl:ObjectProperty ;
+    rdfs:label "has submodels"^^xsd:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range aas:SubmodelDescriptor ;
+    rdfs:comment "Descriptors for the submodels of the AAS."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/SubmodelDescriptor
+aas:SubmodelDescriptor rdf:type owl:Class ;
+    rdfs:subClassOf aas:Descriptor ;
+    rdfs:subClassOf aas:HasSemantics ;
+    rdfs:label "Submodel descriptor"^^xsd:string ;
+    rdfs:comment "Descriptor for Submodel ."@en ;
+.
 
 
 ###  https://admin-shell.io/aas/3/0/RC02/ReferenceElement
@@ -1935,7 +2010,7 @@ aas:SubmodelElementList rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/PermissionsPerObject/object> rdf:type owl:ObjectProperty ;
     rdfs:label "has object"^^xsd:string ;
     rdfs:domain aas:PermissionsPerObject ;
-    rdfs:range aas:ModelReference ;
+    rdfs:range aas:Reference ;
     rdfs:comment "A data element that further classifies a specific subject."@en ;
 .
 
@@ -1965,7 +2040,7 @@ aas:SubmodelElementList rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/ObjectAttributes/objectAttribute> rdf:type owl:ObjectProperty ;
     rdfs:label "has default environment attributes"^^xsd:string ;
     rdfs:domain aas:ObjectAttributes ;
-    rdfs:range aas:ModelReference ;
+    rdfs:range aas:Reference ;
     rdfs:comment "Reference to a data element that further classifies an object."@en ;
 .
 
@@ -1994,7 +2069,7 @@ aas:SubmodelElementList rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/Permission/permission> rdf:type owl:ObjectProperty ;
     rdfs:label "has permission"^^xsd:string ;
     rdfs:domain aas:Permission ;
-    rdfs:range aas:ModelReference ;
+    rdfs:range aas:Reference ;
     rdfs:comment "Reference to a property defining the semantics of the permission"@en ;
 .
 
@@ -2046,6 +2121,9 @@ aas:PermissionKind rdf:type owl:Class ;
 ### Extensions for Security END
 ###
 
+###
+### Extensions for Descriptor Start
+###
 
 ###
 ### changes for DataSpecificationTypeIEC61360
