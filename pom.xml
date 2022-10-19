@@ -2,34 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>io.admin-shell.aas</groupId>
-	<artifactId>common</artifactId>
-	<packaging>pom</packaging>
-	<version>${revision}</version>
+    <groupId>org.eclipse.aas4j</groupId>
+    <artifactId>generator-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>${revision}</version>
 
 
-	<name>AAS Code Gen Tool</name>
-	<description>The Code Generation Tool to create Java classes of the AAS Metamodel.</description>
-	<url>https://github.com/admin-shell-io/java-generator</url>
-	<inceptionYear>2021</inceptionYear>
-	<organization>
-		<name>Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS</name>
-		<url>https://www.iais.fraunhofer.de/</url>
-	</organization>
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+    <name>AAS Code Gen Tool</name>
+    <description>The Code Generation Tool to create Java classes of the AAS Metamodel.</description>
+    <url>https://github.com/eclipse-digitaltwin/aas4j-model-generator</url>
+    <inceptionYear>2021</inceptionYear>
+    <organization>
+      <name>Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS</name>
+      <url>https://www.iais.fraunhofer.de/</url>
+    </organization>
+    <licenses>
+      <license>
+        <name>Apache License, Version 2.0</name>
+        <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
 
 	<developers>
 		<developer>
 			<name>Sebastian Bader</name>
-			<email>sebastian.bader@iais.fraunhofer.de</email>
-			<organization>Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS</organization>
-			<organizationUrl>https://www.iais.fraunhofer.de/</organizationUrl>
+			<email>s.bader@sap.com</email>
+			<organization>SAP SE</organization>
+			<organizationUrl>https://www.sap.com/</organizationUrl>
 			<roles>
 				<role>lead</role>
 				<role>developer</role>
@@ -51,120 +51,59 @@
 		<url>https://github.com/admin-shell-io/java-generator/issues</url>
 	</issueManagement>
 
-	<modules>
-		<module>util</module>
-		<module>generator</module>
-		<module>aas</module>
-	</modules>
-	<properties>
-		<!-- General -->
-		<revision>2.0.0-SNAPSHOT</revision>
-		<jackson.version>2.11.2</jackson.version>
-		<!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-		<email>contact@ids.fraunhofer.de</email>
+    <modules>
+        <module>util</module>
+        <module>generator</module>
+        <module>model</module>
+    </modules>
+    <properties>
+  		  <!-- General -->
+        <revision>1.2.0</revision>
+        <jackson.version>2.11.2</jackson.version>
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+        <email>contact@ids.fraunhofer.de</email>
 
-		<!-- Build info -->
-		<java.version>11</java.version>
-		<maven.compiler.release>${java.version}</maven.compiler.release>
-		<maven.minimum.version>3.3.9</maven.minimum.version>
+        <!-- Build info -->
+        <java.version>11</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.minimum.version>3.3.9</maven.minimum.version>
 
 		<gpg.keyname>0xDFCC34A6</gpg.keyname>
 		<plugin.license.version>4.1</plugin.license.version>
 		<plugin.gpg.version>3.0.1</plugin.gpg.version>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>dev-bader-aas</id>
-			<properties>
-				<infomodel-sourcebase>
-                    ../aas-specs/schemas/rdf
-                </infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>CI</id>
-			<properties>
-				<infomodel-sourcebase>
-                    InformationModel
-                </infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>CI-AAS</id>
-			<properties>
-				<infomodel-sourcebase>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <infomodel-sourcebase>../aas-specs/schemas/rdf</infomodel-sourcebase>
+            </properties>
+        </profile>
+        <profile>
+            <id>CI-AAS</id>
+            <properties>
+                <infomodel-sourcebase>
                     aas-specs/schemas/rdf
                 </infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>MB</id>
-			<properties>
-				<infomodel-sourcebase>
-    					../InfoModel
-    				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>MB-AAS</id>
-			<properties>
-				<infomodel-sourcebase>
-    					../aas-specs/schemas/rdf/full
-    				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>MB-AAS-minimal</id>
-			<properties>
-				<infomodel-sourcebase>
-    					../aas-specs/schemas/rdf/minimal
-    				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>format</id>
-			<properties>
-				<infomodel-sourcebase>
+            </properties>
+        </profile>
+        <profile>
+            <id>format</id>
+            <properties>
+                <infomodel-sourcebase>
                     ../rdf
                 </infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>PNL</id>
-			<properties>
-				<infomodel-sourcebase>
-    					../InformationModel
-    				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>PNL-AAS</id>
-			<properties>
-				<infomodel-sourcebase>
-    					../aas-specs/schemas/rdf
-    				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>AAS</id>
-			<properties>
-				<ontology.title>Asset Administration Shell</ontology.title>
-				<ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
-				<ontology.namespace.prefix>aas</ontology.namespace.prefix>
-			</properties>
-		</profile>
-		<profile>
-			<id>DG</id>
-			<properties>
-				<ontology.title>Asset Administration Shell</ontology.title>
-				<ontology.namespace>https://admin-shell.io/aas/3/0/RC02/</ontology.namespace>
-				<ontology.namespace.prefix>aas</ontology.namespace.prefix>
-				<infomodel-sourcebase>
-    					./spec/rdf
-    				</infomodel-sourcebase>
-			</properties>
-		</profile>
+            </properties>
+        </profile>
+        <profile>
+            <id>AAS</id>
+            <properties>
+                <ontology.title>Asset Administration Shell</ontology.title>
+                <ontology.namespace>https://admin-shell.io/aas/3/0/RC02/</ontology.namespace>
+                <ontology.namespace.prefix>aas</ontology.namespace.prefix>
+            </properties>
+        </profile>
 
 		<!-- This profile is for the continuous integration pipeline for deploying to the central repository, which requires artifacts to be signed -->
 		<profile>
