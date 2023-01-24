@@ -415,7 +415,7 @@ aas:DataSpecification rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/DataSpecification/description> rdf:type owl:ObjectProperty ;
     rdfs:label "has description"^^xsd:string ;
     rdfs:domain aas:DataSpecification ;
-    rdfs:range rdf:langString ;
+    rdfs:range aas:LangString ;
     rdfs:comment "Description how and in which context the data specification template is applicable. The description can be provided in several languages."@en ;
 .
 
@@ -1212,6 +1212,42 @@ aas:KeyTypes rdf:type owl:Class ;
     rdfs:comment "List of Submodel Elements"@en ;
 .
 
+###  https://admin-shell.io/aas/3/0/RC02/LangString
+aas:LangString rdf:type owl:Class ;
+    rdfs:label "Lang String"^^xsd:string ;
+    rdfs:comment "Strings with language tags"@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/LangString/language
+<https://admin-shell.io/aas/3/0/RC02/LangString/language> rdf:type owl:DatatypeProperty ;
+    rdfs:label "has language"^^xsd:string ;
+    rdfs:domain aas:LangString ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Language tag conforming to BCP 47"@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/LangString/text
+<https://admin-shell.io/aas/3/0/RC02/LangString/text> rdf:type owl:DatatypeProperty ;
+    rdfs:label "has text"^^xsd:string ;
+    rdfs:domain aas:LangString ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Text in the 'language'"@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/LangStringSet
+aas:LangStringSet rdf:type owl:Class ;
+    rdfs:label "Lang String Set"^^xsd:string ;
+    rdfs:comment "Array of elements of type langString"@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/RC02/LangStringSet/langStrings
+<https://admin-shell.io/aas/3/0/RC02/LangStringSet/langStrings> rdf:type owl:ObjectProperty ;
+    rdfs:label "has lang strings"^^xsd:string ;
+    rdfs:domain aas:LangStringSet ;
+    rdfs:range aas:LangString ;
+    rdfs:comment "Strings in different languages"@en ;
+.
+
 ###  https://admin-shell.io/aas/3/0/RC02/ModelingKind
 aas:ModelingKind rdf:type owl:Class ;
     rdfs:label "Modeling Kind"^^xsd:string ;
@@ -1245,7 +1281,7 @@ aas:MultiLanguageProperty rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/MultiLanguageProperty/value> rdf:type owl:ObjectProperty ;
     rdfs:label "has value"^^xsd:string ;
     rdfs:domain aas:MultiLanguageProperty ;
-    rdfs:range rdf:langString ;
+    rdfs:range aas:LangString ;
     rdfs:comment "The value of the property instance."@en ;
 .
 
@@ -1481,7 +1517,7 @@ aas:Referable rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/Referable/description> rdf:type owl:ObjectProperty ;
     rdfs:label "has description"^^xsd:string ;
     rdfs:domain aas:Referable ;
-    rdfs:range rdf:langString ;
+    rdfs:range aas:LangString ;
     rdfs:comment "Description or comments on the element."@en ;
 .
 
@@ -1489,7 +1525,7 @@ aas:Referable rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/RC02/Referable/displayName> rdf:type owl:ObjectProperty ;
     rdfs:label "has display name"^^xsd:string ;
     rdfs:domain aas:Referable ;
-    rdfs:range rdf:langString ;
+    rdfs:range aas:LangString ;
     rdfs:comment "Display name. Can be provided in several languages."@en ;
 .
 
@@ -2448,7 +2484,7 @@ iec61360:String rdf:type iec61360:DataTypeIEC61360 ;
 
 ###  https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC02/StringTranslatable
 iec61360:StringTranslatable rdf:type iec61360:DataTypeIEC61360 ;
-    rdfs:seeAlso rdf:langString ;
+    rdfs:seeAlso aas:LangStringSet ;
     rdfs:label "translatable string according to IEC61360"^^xsd:string ;
 .
 

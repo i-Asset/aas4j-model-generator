@@ -22,16 +22,32 @@ template idstt:init-default-fields(?class) {
 
         IF( BOUND(?defaultValue),
             #then
-            CONCAT(
+            CONCAT( 
                 "\t\tthis.",
-                 str(?field),
-                  " = ",
-                  ucase(substr(?className, 1, 1)),
-                  substr(?className, 2),
-                  ".",
-                  ucase(replace(st:call-template(idstt:to_class_name, ?defaultValue), "([a-z])([A-Z])", CONCAT("$1", "_", "$2"))),
-                  " ;"
-            ),
+                str(?field),
+                 " = ",
+            
+            	if (str(?range) = str(<xsd:string>),
+            		# when string 
+            		CONCAT(
+            			"\"", 
+            			str(?defaultValue), 
+            			"\""
+            		),
+            		# else  
+            		CONCAT(
+                  		ucase(substr(?className, 1, 1)),
+                  		substr(?className, 2),
+                  		".",
+                  		ucase(
+                  			replace(st:call-template(idstt:to_class_name, ?defaultValue),
+                  					"([a-z])([A-Z])", 
+                  					CONCAT("$1", "_", "$2") 
+                  			)
+                  	)
+                  			
+                 )),
+                 " ;"),
             #else
             ""
         )
@@ -54,16 +70,20 @@ where {
         #Note: This block of code below was taken from the "range-to-java-type" template
         OPTIONAL {
             ?property rdfs:range ?range.
-            {?property rdfs:domain/^(rdfs:subClassOf*) ?class.} UNION {
-            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first/^(rdfs:subClassOf*) ?class.}
-
+            {
+            	?property rdfs:domain/^(rdfs:subClassOf*) ?class.
+            } UNION {
+            	?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first/^(rdfs:subClassOf*) ?class.
+            }
+            
             OPTIONAL {
-                ?class rdfs:subClassOf* ?superClass .
-                ?classShape sh:targetClass ?superClass ;
-                    (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
                 ?propertyShape sh:path ?property ;
                     sh:defaultValue ?defaultValue .
+                ?classShape sh:property ?propertyShape ;
+                    sh:targetClass ?parentClass .
+                ?class rdfs:subClassOf* ?parentClass .
             }
+            
         }
     }
 
