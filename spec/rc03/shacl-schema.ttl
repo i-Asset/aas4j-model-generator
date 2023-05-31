@@ -879,32 +879,55 @@ aas:ReferenceShape a sh:NodeShape ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path <https://admin-shell.io/aas/3/0/RC02/Reference/referredSemanticId> ;
-        sh:class aas:Reference ;
-        sh:minCount 0 ;
-        sh:maxCount 1 ;
-    ] ;
+###    sh:property [
+###        a sh:PropertyShape ;
+###        sh:path <https://admin-shell.io/aas/3/0/RC02/Reference/referredSemanticId> ;
+###        sh:class aas:Reference ;
+###        sh:minCount 0 ;
+###        sh:maxCount 1 ;
+###    ] ;
     sh:property [
         a sh:PropertyShape ;
         sh:path <https://admin-shell.io/aas/3/0/RC02/Reference/key> ;
         sh:class aas:Key ;
         sh:minCount 1 ;
     ] ;
-#    sh:sparql [
-#        a sh:SPARQLConstraint ;
-#        sh:message "(ReferenceShape): An aas:Reference is an abstract class. Please use one of the subclasses for the generation of instances."@en ;
-#        sh:prefixes aas: ;
-#        sh:select """
-#            SELECT ?this ?type
-#            WHERE {
-#                ?this rdf:type ?type .
-#                FILTER (?type = aas:Reference)
-#            }
-#        """ ;
-#    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "(ReferenceShape): An aas:Reference is an abstract class. Please use one of the subclasses for the generation of instances."@en ;
+        sh:prefixes aas: ;
+        sh:select """
+            SELECT ?this ?type
+            WHERE {
+                ?this rdf:type ?type .
+                FILTER (?type = aas:Reference)
+            }
+        """ ;
+    ] ;
 
+.
+aas:ModelReferenceShape a sh:NodeShape ;
+    sh:targetClass aas:ModelReference ;
+    rdfs:subClassOf aas:ReferenceShape ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:path <https://admin-shell.io/aas/3/0/RC02/ModelReference/referredSemanticId> ;
+        sh:class aas:ModelReference ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "(ModelReferenceShape): An aas:ModelReference is a generic class."@en ;
+        sh:prefixes aas: ;
+        sh:select """
+            SELECT ?this ?type
+            WHERE {
+                ?this rdf:type ?type .
+                FILTER (?type = aas:ModelReference)
+            }
+        """ ;
+    ] ;
 .
 
 aas:ReferenceElementShape a sh:NodeShape ;

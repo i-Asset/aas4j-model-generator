@@ -1516,38 +1516,45 @@ aas:Reference rdf:type owl:Class ;
 .
 
 ###  https://admin-shell.io/aas/3/0/RC02/Reference/referredSemanticId
-<https://admin-shell.io/aas/3/0/RC02/Reference/referredSemanticId> rdf:type owl:ObjectProperty ;
-    rdfs:label "has referred semantic id"^^xsd:string ;
-    rdfs:domain aas:Reference ;
-    rdfs:range aas:Reference ;
-    rdfs:comment "'semanticId' of the referenced model element ('type' = 'ModelReference')."@en ;
-.
+### <https://admin-shell.io/aas/3/0/RC02/Reference/referredSemanticId> rdf:type owl:ObjectProperty ;
+###     rdfs:label "has referred semantic id"^^xsd:string ;
+###     rdfs:domain aas:Reference ;
+###     rdfs:range aas:Reference ;
+###     rdfs:comment "'semanticId' of the referenced model element ('type' = 'ModelReference')."@en ;
+### .
 
 ###  https://admin-shell.io/aas/3/0/RC02/Reference/type
-<https://admin-shell.io/aas/3/0/RC02/Reference/type> rdf:type owl:ObjectProperty ;
-    rdfs:label "has type"^^xsd:string ;
-    rdfs:domain aas:Reference ;
-    rdfs:range aas:ReferenceTypes ;
-    rdfs:comment "Type of the reference."@en ;
-.
+### <https://admin-shell.io/aas/3/0/RC02/Reference/type> rdf:type owl:ObjectProperty ;
+###     rdfs:label "has type"^^xsd:string ;
+###     rdfs:domain aas:Reference ;
+###     rdfs:range aas:ReferenceTypes ;
+###     rdfs:comment "Type of the reference."@en ;
+### .
 
-###x
+###
 ### Extensions for Reference -> ModelClasses START
 ###
 
 ###  https://admin-shell.io/aas/3/0/RC02/GlobalReference
-### aas:GlobalReference rdf:type owl:Class ;
-###    rdfs:subClassOf aas:Reference ;
-###    rdfs:label "GlobalReference"^^xsd:string ;
-###    rdfs:comment "Reference to an external resource."@en ;
-###.
+aas:GlobalReference rdf:type owl:Class ;
+   rdfs:subClassOf aas:Reference ;
+   rdfs:label "GlobalReference"^^xsd:string ;
+   rdfs:comment "Reference to an external resource."@en ;
 
-###  https://admin-shell.io/aas/3/0/RC02/ModelReference
-### aas:ModelReference rdf:type owl:Class ;
-###     rdfs:subClassOf aas:Reference ;
-###     rdfs:label "ModelReference"^^xsd:string ;
-###     rdfs:comment "Reference to an resource inside the AAS."@en ;
-### .
+.
+### https://admin-shell.io/aas/3/0/RC02/ModelReference
+aas:ModelReference rdf:type owl:Class ;
+    rdfs:subClassOf aas:Reference ;
+    rdfs:label "ModelReference"^^xsd:string ;
+    rdfs:comment "Reference to an resource inside the AAS."@en ;
+.
+### https://admin-shell.io/aas/3/0/RC02/ModelReference/referredSemanticId
+<https://admin-shell.io/aas/3/0/RC02/ModelReference/referredSemanticId> rdf:type owl:ObjectProperty ;
+    rdfs:label "has referred semantic id"^^xsd:string ;
+    rdfs:domain aas:ModelReference ;
+    rdfs:range aas:ModelReference ;
+     rdfs:comment "'semanticId' of the referenced model element ('type' = 'ModelReference')."@en ;
+.
 
 ###
 ### Extensions for Reference -> ModelClasses END
@@ -1560,7 +1567,7 @@ aas:Descriptor rdf:type owl:Class ;
     rdfs:comment "Descriptor holding the endpoints."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/RC02/Reference/key
+###  https://admin-shell.io/aas/3/0/RC02/Descriptor/endpoint
 <https://admin-shell.io/aas/3/0/RC02/Descriptor/endpoint> rdf:type owl:ObjectProperty ;
     rdfs:label "has Endpoint"^^xsd:string ;
     rdfs:domain aas:Descriptor ;
