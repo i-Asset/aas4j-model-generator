@@ -16,9 +16,9 @@
 
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix aas: <https://admin-shell.io/aas/3/0/RC02/>
-prefix def: <https://admin-shell.io/aas/3/0/RC02/DataTypeDefXsd/>
-prefix iec61360: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC02/>
+prefix aas: <https://admin-shell.io/aas/3/0/>
+prefix def: <https://admin-shell.io/aas/3/0/DataTypeDefXsd/>
+prefix iec61360: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/>
 
 template idstt:to_enum_value(?class) {
 	 

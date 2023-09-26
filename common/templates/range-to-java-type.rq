@@ -32,7 +32,7 @@ template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?brac
         # else
         st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, ?isArray)
     )
-
+	# if ( ?isGeneric, "<?>", "")
 }
 where {
     ?property rdfs:range ?range.
@@ -46,7 +46,6 @@ where {
         ?propertyShape sh:path ?property ;
             sh:maxCount ?maxCount .
     }
-
     BIND(
         if ( BOUND(?maxCount),
             # -> [?, max]
@@ -60,5 +59,6 @@ where {
             true
         ) as ?isArray
     )
+    BIND( st:call-template(idstt:class-is-generic, ?range) AS ?isGeneric )
 
 } LIMIT 1
