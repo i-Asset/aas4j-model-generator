@@ -217,7 +217,7 @@ aas:AssetAdministrationShell rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/AssetAdministrationShell/derivedFrom> rdf:type owl:ObjectProperty ;
     rdfs:label "has derived from"^^xs:string ;
     rdfs:domain aas:AssetAdministrationShell ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "The reference to the AAS the AAS was derived from."@en ;
 .
 
@@ -225,7 +225,7 @@ aas:AssetAdministrationShell rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/AssetAdministrationShell/submodel> rdf:type owl:ObjectProperty ;
     rdfs:label "has submodels"^^xs:string ;
     rdfs:domain aas:AssetAdministrationShell ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "References to submodels of the AAS."@en ;
 .
 
@@ -267,8 +267,8 @@ aas:AssetInformation rdf:type owl:Class ;
     rdfs:comment "Global identifier of the asset the AAS is representing."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/AssetInformation/specificAssetIds
-<https://admin-shell.io/aas/3/0/AssetInformation/specificAssetIds> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/AssetInformation/specificAssetId
+<https://admin-shell.io/aas/3/0/AssetInformation/specificAssetId> rdf:type owl:ObjectProperty ;
     rdfs:label "has specific asset IDs"^^xs:string ;
     rdfs:domain aas:AssetInformation ;
     rdfs:range aas:SpecificAssetId ;
@@ -339,7 +339,7 @@ aas:BasicEventElement rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/BasicEventElement/messageBroker> rdf:type owl:ObjectProperty ;
     rdfs:label "has message broker"^^xs:string ;
     rdfs:domain aas:BasicEventElement ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "Information, which outer message infrastructure shall handle messages for the 'EventElement'. Refers to a 'Submodel', 'SubmodelElementList', 'SubmodelElementCollection' or 'Entity', which contains 'DataElement''s describing the proprietary specification for the message broker."@en ;
 .
 
@@ -363,7 +363,7 @@ aas:BasicEventElement rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/BasicEventElement/observed> rdf:type owl:ObjectProperty ;
     rdfs:label "has observed"^^xs:string ;
     rdfs:domain aas:BasicEventElement ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "Reference to the 'Referable', which defines the scope of the event. Can be 'AssetAdministrationShell', 'Submodel', or 'SubmodelElement'."@en ;
 .
 
@@ -940,8 +940,8 @@ aas:Entity rdf:type owl:Class ;
     rdfs:comment "Reference to a specific asset ID representing a supplementary identifier of the asset represented by the Asset Administration Shell."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/Entity/statements
-<https://admin-shell.io/aas/3/0/Entity/statements> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/Entity/statement
+<https://admin-shell.io/aas/3/0/Entity/statement> rdf:type owl:ObjectProperty ;
     rdfs:label "has statements"^^xs:string ;
     rdfs:domain aas:Entity ;
     rdfs:range aas:SubmodelElement ;
@@ -992,8 +992,8 @@ aas:Environment rdf:type owl:Class ;
     rdfs:comment "Concept description"@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/Environment/submodels
-<https://admin-shell.io/aas/3/0/Environment/submodels> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/Environment/submodel
+<https://admin-shell.io/aas/3/0/Environment/submodel> rdf:type owl:ObjectProperty ;
     rdfs:label "has submodels"^^xs:string ;
     rdfs:domain aas:Environment ;
     rdfs:range aas:Submodel ;
@@ -1017,7 +1017,7 @@ aas:EventPayload rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/EventPayload/observableReference> rdf:type owl:ObjectProperty ;
     rdfs:label "has observable reference"^^xs:string ;
     rdfs:domain aas:EventPayload ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "Reference to the referable, which defines the scope of the event."@en ;
 .
 
@@ -1041,7 +1041,7 @@ aas:EventPayload rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/EventPayload/source> rdf:type owl:ObjectProperty ;
     rdfs:label "has source"^^xs:string ;
     rdfs:domain aas:EventPayload ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "Reference to the source event element, including identification of 'AssetAdministrationShell', 'Submodel', 'SubmodelElement''s."@en ;
 .
 
@@ -1096,7 +1096,7 @@ aas:Extension rdf:type owl:Class ;
 <https://admin-shell.io/aas/3/0/Extension/refersTo> rdf:type owl:ObjectProperty ;
     rdfs:label "has refers to"^^xs:string ;
     rdfs:domain aas:Extension ;
-    rdfs:range aas:Reference ;
+    rdfs:range aas:ModelReference ;
     rdfs:comment "Reference to an element the extension refers to."@en ;
 .
 
@@ -1450,10 +1450,17 @@ aas:LangStringTextType rdf:type owl:Class ;
 aas:LevelType rdf:type owl:Class ;
     rdfs:label "Level Type"^^xs:string ;
     rdfs:comment "Value represented by up to four variants of a numeric value in a specific role: MIN, NOM, TYP and MAX. True means that the value is available, false means the value is not available."@en ;
+    owl:oneOf (
+        <https://admin-shell.io/aas/3/0/LevelType/min>
+        <https://admin-shell.io/aas/3/0/LevelType/max>
+        <https://admin-shell.io/aas/3/0/LevelType/nom>
+        <https://admin-shell.io/aas/3/0/LevelType/typ>
+    ) ;
+    
 .
 
 ###  https://admin-shell.io/aas/3/0/LevelType/max
-<https://admin-shell.io/aas/3/0/LevelType/max> rdf:type owl:DatatypeProperty ;
+<https://admin-shell.io/aas/3/0/LevelType/max> rdf:type aas:LevelType;
     rdfs:label "has max"^^xs:string ;
     rdfs:domain aas:LevelType ;
     rdfs:range xs:boolean ;
@@ -1461,7 +1468,7 @@ aas:LevelType rdf:type owl:Class ;
 .
 
 ###  https://admin-shell.io/aas/3/0/LevelType/min
-<https://admin-shell.io/aas/3/0/LevelType/min> rdf:type owl:DatatypeProperty ;
+<https://admin-shell.io/aas/3/0/LevelType/min> rdf:type aas:LevelType ;
     rdfs:label "has min"^^xs:string ;
     rdfs:domain aas:LevelType ;
     rdfs:range xs:boolean ;
@@ -1469,7 +1476,7 @@ aas:LevelType rdf:type owl:Class ;
 .
 
 ###  https://admin-shell.io/aas/3/0/LevelType/nom
-<https://admin-shell.io/aas/3/0/LevelType/nom> rdf:type owl:DatatypeProperty ;
+<https://admin-shell.io/aas/3/0/LevelType/nom> rdf:type aas:LevelType ;
     rdfs:label "has nom"^^xs:string ;
     rdfs:domain aas:LevelType ;
     rdfs:range xs:boolean ;
@@ -1477,7 +1484,7 @@ aas:LevelType rdf:type owl:Class ;
 .
 
 ###  https://admin-shell.io/aas/3/0/LevelType/typ
-<https://admin-shell.io/aas/3/0/LevelType/typ> rdf:type owl:DatatypeProperty ;
+<https://admin-shell.io/aas/3/0/LevelType/typ> rdf:type aas:LevelType ;
     rdfs:label "has typ"^^xs:string ;
     rdfs:domain aas:LevelType ;
     rdfs:range xs:boolean ;
@@ -1536,24 +1543,24 @@ aas:Operation rdf:type owl:Class ;
     rdfs:comment "An operation is a submodel element with input and output variables."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/Operation/inoutputVariables
-<https://admin-shell.io/aas/3/0/Operation/inoutputVariables> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/Operation/inoutputVariable
+<https://admin-shell.io/aas/3/0/Operation/inoutputVariable> rdf:type owl:ObjectProperty ;
     rdfs:label "has inoutput variables"^^xs:string ;
     rdfs:domain aas:Operation ;
     rdfs:range aas:OperationVariable ;
     rdfs:comment "Parameter that is input and output of the operation."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/Operation/inputVariables
-<https://admin-shell.io/aas/3/0/Operation/inputVariables> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/Operation/inputVariable
+<https://admin-shell.io/aas/3/0/Operation/inputVariable> rdf:type owl:ObjectProperty ;
     rdfs:label "has input variables"^^xs:string ;
     rdfs:domain aas:Operation ;
     rdfs:range aas:OperationVariable ;
     rdfs:comment "Input parameter of the operation."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/Operation/outputVariables
-<https://admin-shell.io/aas/3/0/Operation/outputVariables> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/Operation/outputVariable
+<https://admin-shell.io/aas/3/0/Operation/outputVariable> rdf:type owl:ObjectProperty ;
     rdfs:label "has output variables"^^xs:string ;
     rdfs:domain aas:Operation ;
     rdfs:range aas:OperationVariable ;
@@ -1611,8 +1618,8 @@ aas:Qualifiable rdf:type owl:Class ;
     rdfs:comment "The value of a qualifiable element may be further qualified by one or more qualifiers."@en ;
 .
 
-###  https://admin-shell.io/aas/3/0/Qualifiable/qualifiers
-<https://admin-shell.io/aas/3/0/Qualifiable/qualifiers> rdf:type owl:ObjectProperty ;
+###  https://admin-shell.io/aas/3/0/Qualifiable/qualifier
+<https://admin-shell.io/aas/3/0/Qualifiable/qualifier> rdf:type owl:ObjectProperty ;
     rdfs:label "has qualifiers"^^xs:string ;
     rdfs:domain aas:Qualifiable ;
     rdfs:range aas:Qualifier ;
@@ -1814,17 +1821,117 @@ aas:ModelReference rdf:type owl:Class ;
     rdfs:comment "Reference to an resource inside the AAS."@en ;
 .
 ### https://admin-shell.io/aas/3/0/ModelReference/referredSemanticId
-<https://admin-shell.io/aas/3/0/RC02/ModelReference/referredSemanticId> rdf:type owl:ObjectProperty ;
+<https://admin-shell.io/aas/3/0/ModelReference/referredSemanticId> rdf:type owl:ObjectProperty ;
     rdfs:label "has referred semantic id"^^xsd:string ;
     rdfs:domain aas:ModelReference ;
-    rdfs:range aas:ModelReference ;
-     rdfs:comment "'semanticId' of the referenced model element ('type' = 'ModelReference')."@en ;
+    rdfs:range aas:Reference ;
+    rdfs:comment "'semanticId' of the referenced model element ('type' = 'ModelReference')."@en ;
 .
 
 ###
 ### Extensions for Reference -> ModelClasses END
 ###
 
+###
+### Extensions for Descriptor Classes (not part of the meta-model)
+###
+
+###  https://admin-shell.io/aas/3/0/Descriptor
+aas:Descriptor rdf:type owl:Class ;
+    rdfs:subClassOf aas:Identifiable ;
+    rdfs:label "Descriptor"^^xsd:string ;
+    rdfs:comment "Descriptor holding the endpoints."@en ;
+.
+###  https://admin-shell.io/aas/3/0/Descriptor/endpoint
+<https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/endpoint> rdf:type owl:ObjectProperty ;
+    rdfs:label "Endpoint of the network resource"^^xs:string ;
+    rdfs:domain aas:Descriptor ;
+    rdfs:range aas:Endpoint ;
+    rdfs:comment "Endpoint of the network Resource"@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/Endpoint
+aas:Endpoint rdf:type owl:Class ;
+    rdfs:label "Endpoint"^^xsd:string ;
+    rdfs:comment "Endpoint defining ProtocolInformation."@en ;
+.
+###  https://admin-shell.io/aas/3/0/Endpoint/type
+<https://admin-shell.io/aas/3/0/Endpoint/type> rdf:type owl:ObjectProperty ;
+    rdfs:label "has type"^^xsd:string ;
+    rdfs:domain aas:Endpoint ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Endpoint type."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/Endpoint/address
+<https://admin-shell.io/aas/3/0/Endpoint/address> rdf:type owl:ObjectProperty ;
+    rdfs:label "has type"^^xsd:string ;
+    rdfs:domain aas:Endpoint ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Endpoint adress."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor
+aas:AssetAdministrationShellDescriptor rdf:type owl:Class ;
+    rdfs:subClassOf aas:Descriptor ;
+    rdfs:label "Shell Descriptor"^^xsd:string ;
+    rdfs:comment "Descriptor of an Asset Adminstration Shell."@en ;
+
+. 
+
+###  https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/assetKind
+<https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/assetKind> rdf:type owl:ObjectProperty ;
+    rdfs:label "has asset kind"^^xs:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range aas:AssetKind ;
+    rdfs:comment "Denotes whether the Asset is of kind 'Type' or 'Instance'."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/assetType
+<https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/assetType> rdf:type owl:DatatypeProperty ;
+    rdfs:label "has asset type"^^xs:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range xs:string ;
+    rdfs:comment "In case 'assetKind' is applicable the 'assetType' is the asset ID of the type asset of the asset under consideration as identified by 'globalAssetId'."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/globalAssetId
+<https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/globalAssetId> rdf:type owl:DatatypeProperty ;
+    rdfs:label "has global asset ID"^^xs:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range xs:string ;
+    rdfs:comment "Global identifier of the asset the AAS is representing."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/specificAssetId
+<https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/specificAssetId> rdf:type owl:ObjectProperty ;
+    rdfs:label "has specific asset IDs"^^xs:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range aas:SpecificAssetId ;
+    rdfs:comment "Additional domain-specific, typically proprietary identifier for the asset like e.g., serial number etc."@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/submodelDescriptor
+<https://admin-shell.io/aas/3/0/AssetAdministrationShellDescriptor/submodelDescriptor> rdf:type owl:ObjectProperty ;
+    rdfs:label "has specific asset IDs"^^xs:string ;
+    rdfs:domain aas:AssetAdministrationShellDescriptor ;
+    rdfs:range aas:SubmodelDescriptor ;
+    rdfs:comment "Descriptor of a Submodel of the Asset Administration Shell"@en ;
+.
+
+###  https://admin-shell.io/aas/3/0/SubmodelDescriptor
+aas:SubmodelDescriptor rdf:type owl:Class ;
+    rdfs:subClassOf aas:Descriptor ;
+    rdfs:subClassOf aas:HasSemantics ;
+    rdfs:label "Submodel Descriptor"^^xsd:string ;
+    rdfs:comment "Descriptor of a Submoddel."@en ;
+.
+
+###
+### Extensions for Descriptor Classes (not part of the meta-model)
+###
+
+###
 ###  https://admin-shell.io/aas/3/0/ReferenceElement
 aas:ReferenceElement rdf:type owl:Class ;
     rdfs:subClassOf aas:DataElement ;

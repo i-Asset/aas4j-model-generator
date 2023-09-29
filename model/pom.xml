@@ -14,7 +14,7 @@
 
 	<properties>
     <ontology.title>Asset Administration Shell</ontology.title>
-		<ontology.namespace>https://admin-shell.io/aas/3/0/RC02/</ontology.namespace>
+		<ontology.namespace>https://admin-shell.io/aas/3/0/</ontology.namespace>
 		<ontology.namespace.prefix>aas</ontology.namespace.prefix>
 	</properties>
 
@@ -248,7 +248,7 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <!-- TODO: somehow doesn't find the variable locally <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>-->
-                                <argument>-vd</argument><argument>../aas-specs/schemas/rdf</argument>
+                                <argument>-vd</argument><argument>./spec/rdf</argument>
                                 <argument>-pp</argument><argument>**/rdf-ontology.ttl</argument>
                                 <argument>-pp</argument><argument>**/shacl-schema.ttl</argument>
                                 <!-- TODO: somehow doesn't find the variable locally <argument>-td</argument><argument>${tmp-path}/templates</argument> -->
@@ -274,9 +274,9 @@
                                 <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/model/impl"/>
                                 <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/model/builder"/>
                                 <mkdir dir="${tmp-path}/org/eclipse/aas4j/v3/model/annotations"/>-->
-                                <mkdir dir="/tmp/org/eclipse/aas4j/v3/model/impl"/>
-                                <mkdir dir="/tmp/org/eclipse/aas4j/v3/model/builder"/>
-                                <mkdir dir="/tmp/org/eclipse/aas4j/v3/model/annotations"/>
+                                <mkdir dir="/tmp/org/eclipse/digitaltwin/aas4j/v3/model/impl"/>
+                                <mkdir dir="/tmp/org/eclipse/digitaltwin/aas4j/v3/model/builder"/>
+                                <mkdir dir="/tmp/org/eclipse/digitaltwin/aas4j/v3/model/annotations"/>
                             </target>
                         </configuration>
                         <goals>
