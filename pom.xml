@@ -5,7 +5,7 @@
     <groupId>org.eclipse.aas4j</groupId>
     <artifactId>generator-parent</artifactId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
+    <version>1.2.0</version>
 
 
     <name>AAS Code Gen Tool</name>
@@ -100,7 +100,7 @@
             <id>AAS</id>
             <properties>
                 <ontology.title>Asset Administration Shell</ontology.title>
-                <ontology.namespace>https://admin-shell.io/aas/3/0/RC02/</ontology.namespace>
+                <ontology.namespace>https://admin-shell.io/aas/3/0/</ontology.namespace>
                 <ontology.namespace.prefix>aas</ontology.namespace.prefix>
             </properties>
         </profile>
